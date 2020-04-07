@@ -1,0 +1,73 @@
+[property]
+gie-unique-id=1
+
+gpu-id=0
+
+net-scale-factor=1
+offsets=104;117;123;
+
+## different models
+
+model-file=../fd_lpd_model/res10_300x300_ssd_iter_140000_fp16.caffemodel
+proto-file=../fd_lpd_model/nvidia_deploy.prototxt
+model-engine-file=../fd_lpd_model/res10_300x300_ssd_iter_140000_fp16.caffemodel_b1_fp16.engine
+output-blob-names=detection_out;keep_count
+
+batch-size=1
+
+## primary o secondary
+process-mode=1
+
+## 0 = RGB; 1 = BGR
+model-color-format=0
+
+## 0=FP32, 1=INT8, 2=FP16 mode
+network-mode=2
+
+## attach raw tensor output with GSTBufferMetadata
+output-tensor-meta=1
+
+## number of detected classes
+num-detected-classes=2
+
+## number of skipped batch
+interval=0
+
+## group of detected objects in the same structure
+#enable-dbscan=1
+
+## custom parser for bbox
+parse-bbox-func-name=NvDsInferParseCustomSSD
+custom-lib-path=/home/dlinano/deepstream_sdk_v4.0.2_jetson/sources/objectDetector_SSD/nvdsinfer_custom_impl_ssd/libnvdsinfer_custom_impl_ssd.so
+
+
+[class-attrs-all]
+threshold=0.0
+group-threshold=1
+
+## Set eps=0.7 and minBoxes for enable-dbscan=1; GroupRectangle()
+eps=0.2
+minBoxes=5
+
+
+## Region of Interest Offset
+roi-top-offset=0
+roi-bottom-offset=0
+
+## limit in pixel for detected object
+detected-min-w=0
+detected-min-h=0
+detected-max-w=400
+detected-max-h=800
+
+[class-attrs-1]
+threshold=0.0
+group-threshold=3
+
+roi-top-offset=20
+roi-bottom-offset=10
+
+detected-min-w=0
+detected-min-h=0
+detected-max-w=400
+detected-max-h=800
