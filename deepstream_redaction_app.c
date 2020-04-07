@@ -316,8 +316,8 @@ contact: Shuo Wang (shuow@nvidia.com)");
 
   /* Create nvstreammux instance to form batches from one or more sources. */
   streammux = gst_element_factory_make ("nvstreammux", "stream-muxer");
-  g_object_set (G_OBJECT (streammux), "width", 2560, "height",
-      1920, "batch-size", 1, "batched-push-timeout", 40000, NULL);
+  g_object_set (G_OBJECT (streammux), "width", 1980, "height",
+      1020, "batch-size", 1, "batched-push-timeout", 40000, NULL);
   g_object_set (G_OBJECT (streammux), "nvbuf-memory-type", 0, NULL);
 
   gchar pad_name_sink[16] = "sink_0";
